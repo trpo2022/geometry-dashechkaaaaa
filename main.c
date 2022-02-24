@@ -27,6 +27,23 @@ char* skipCircle(char* cursor, char* startcursor, char circle[])
     return NULL;
 }
 
+char* skipSign(char* cursor, char sign)
+{
+    while (*cursor != sign) {
+        if (*cursor == ' ') {
+            cursor++;
+        }
+
+        return NULL;
+    }
+
+    if (*cursor == sign) {
+        cursor++;
+    }
+
+    return cursor;
+}
+
 int main()
 {
     char str[SIZE];
@@ -41,5 +58,11 @@ int main()
                "'circle'\n");
         return -1;
     }
+
+    if ((cursor = skipSign(cursor, '(')) == NULL) {
+        printf("The character is entered incorrectly: expected '('\n");
+        return -1;
+    }
+
     return 0;
 }
