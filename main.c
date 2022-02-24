@@ -44,12 +44,33 @@ char* skipSign(char* cursor, char sign)
     return cursor;
 }
 
+char* skipDigit(char* cursor, double* digit)
+{
+    char* d;
+
+    while (isdigit(*cursor) == 0) {
+        if (*cursor == ' ') {
+            cursor++;
+        } else {
+            return NULL;
+        }
+    }
+
+    if (isdigit(*cursor) != 0) {
+        *digit = strtod(cursor, &d);
+        cursor = d;
+    }
+
+    return cursor;
+}
+
 int main()
 {
     char str[SIZE];
     char* cursor = str;
     char* startcursor = str;
     char circle[] = {'c', 'i', 'r', 'c', 'l', 'e', '\0'};
+    double x, y, radius;
 
     fgets(str, SIZE, stdin);
 
@@ -61,6 +82,37 @@ int main()
 
     if ((cursor = skipSign(cursor, '(')) == NULL) {
         printf("The character is entered incorrectly: expected '('\n");
+        return -1;
+    }
+
+    if ((cursor = skipDigit(cursor, &x)) == NULL) {
+        printf("Wrong digit entered: expected '<double>'\n");
+        return -1;
+    }
+
+    if ((cursor = skipDigit(cursor, &y)) == NULL) {
+        printf("Wrong digit entered: expected '<double>'\n");
+        return -1;
+    }
+
+    printf("x = %lf\n", x);
+
+    printf("y = %lf\n", y);
+
+    if ((cursor = skipSign(cursor, ',')) == NULL) {
+        printf("The character is entered incorrectly: expected ','\n");
+        return -1;
+    }
+
+    if ((cursor = skipDigit(cursor, &radius)) == NULL) {
+        printf("Wrong digit entered: expected '<double>'\n");
+        return -1;
+    }
+
+    printf("radius = %lf\n", radius);
+
+    if ((cursor = skipSign(cursor, ')')) == NULL) {
+        printf("The character is entered incorrectly: expected ')'\n");
         return -1;
     }
 
