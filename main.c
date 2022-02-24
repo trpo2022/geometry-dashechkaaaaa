@@ -64,6 +64,18 @@ char* skipDigit(char* cursor, double* digit)
     return cursor;
 }
 
+char* checkEndStr(char* cursor)
+{
+    while (*cursor != '\n') {
+        if (*cursor == ' ') {
+            cursor++;
+        }
+        return NULL;
+    }
+
+    return cursor;
+}
+
 int main()
 {
     char str[SIZE];
@@ -113,6 +125,11 @@ int main()
 
     if ((cursor = skipSign(cursor, ')')) == NULL) {
         printf("The character is entered incorrectly: expected ')'\n");
+        return -1;
+    }
+
+    if ((cursor = checkEndStr(cursor)) == NULL) {
+        printf("An unexpected token at the end of a line\n");
         return -1;
     }
 
