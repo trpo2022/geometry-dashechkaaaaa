@@ -107,10 +107,6 @@ int main()
         return -1;
     }
 
-    printf("x = %lf\n", x);
-
-    printf("y = %lf\n", y);
-
     if ((cursor = skipSign(cursor, ',')) == NULL) {
         printf("The character is entered incorrectly: expected ','\n");
         return -1;
@@ -121,8 +117,6 @@ int main()
         return -1;
     }
 
-    printf("radius = %lf\n", radius);
-
     if ((cursor = skipSign(cursor, ')')) == NULL) {
         printf("The character is entered incorrectly: expected ')'\n");
         return -1;
@@ -132,6 +126,11 @@ int main()
         printf("An unexpected token at the end of a line\n");
         return -1;
     }
+
+    printf("\ncircle:\n");
+    printf("x = %lf\n", x);
+    printf("y = %lf\n", y);
+    printf("radius = %lf\n", radius);
 
     return 0;
 }
