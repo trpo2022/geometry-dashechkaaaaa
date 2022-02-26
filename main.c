@@ -94,37 +94,37 @@ int main()
 
     if ((cursor = skipSign(cursor, '(')) == NULL) {
         printf("The character is entered incorrectly: expected '('\n");
-        return -1;
+        return -2;
     }
 
     if ((cursor = skipDigit(cursor, &x)) == NULL) {
         printf("Wrong digit entered: expected '<double>'\n");
-        return -1;
+        return -3;
     }
 
     if ((cursor = skipDigit(cursor, &y)) == NULL) {
         printf("Wrong digit entered: expected '<double>'\n");
-        return -1;
+        return -4;
     }
 
     if ((cursor = skipSign(cursor, ',')) == NULL) {
         printf("The character is entered incorrectly: expected ','\n");
-        return -1;
+        return -5;
     }
 
     if ((cursor = skipDigit(cursor, &radius)) == NULL) {
         printf("Wrong digit entered: expected '<double>'\n");
-        return -1;
+        return -6;
     }
 
     if ((cursor = skipSign(cursor, ')')) == NULL) {
         printf("The character is entered incorrectly: expected ')'\n");
-        return -1;
+        return -7;
     }
 
     if ((cursor = checkEndStr(cursor)) == NULL) {
         printf("An unexpected token at the end of a line\n");
-        return -1;
+        return -8;
     }
 
     printf("\ncircle:\n");
