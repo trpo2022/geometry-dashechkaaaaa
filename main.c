@@ -127,7 +127,7 @@ int main()
         return -8;
     }
 
-    printf("\ncircle:\n");
+    printf("\nFigure name: %s\n", circle);
     printf("x = %lf\n", x);
     printf("y = %lf\n", y);
     printf("radius = %lf\n", radius);
