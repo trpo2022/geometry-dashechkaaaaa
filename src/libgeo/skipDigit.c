@@ -17,21 +17,19 @@ char* skipDigit(char* cursor, double* digit)
 
     while (isdigit(*cursor) == 0) {
         flag = false;
-        if (*cursor == '-'){
+        if (*cursor == '-') {
             flag = true;
             cursor++;
-        }
-        else if (*cursor == ' ') {
+        } else if (*cursor == ' ') {
             cursor++;
         } else {
             return NULL;
         }
     }
 
-
     if (isdigit(*cursor) != 0) {
         *digit = strtod(cursor, &d);
-        if (flag != false){
+        if (flag != false) {
             *digit *= -1;
         }
         cursor = d;
@@ -39,4 +37,3 @@ char* skipDigit(char* cursor, double* digit)
 
     return cursor;
 }
-

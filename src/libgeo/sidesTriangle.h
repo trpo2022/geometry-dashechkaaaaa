@@ -1,3 +1,12 @@
 #pragma once
 
-void sidesTriangle(double, double, double, double, double, double, double*, double*, double*);
+void sidesTriangle(
+        double,
+        double,
+        double,
+        double,
+        double,
+        double,
+        double*,
+        double*,
+        double*);
