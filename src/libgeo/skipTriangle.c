@@ -5,7 +5,7 @@
 
 char* skipTriangle(char* cursor, char* startcursor, char triangle[])
 {
-    int len = 0;
+    long unsigned int len = 0;
 
     while (*startcursor == ' ') {
         startcursor++;
@@ -17,10 +17,9 @@ char* skipTriangle(char* cursor, char* startcursor, char triangle[])
         cursor++;
     }
 
-    if ((strncmp(triangle, startcursor, strlen(triangle)) == 0)) {
-        if (len_triangle == len) {
-            return cursor;
-        }
+    if ((strncmp(triangle, startcursor, strlen(triangle)) == 0)
+        && (len == strlen(triangle))) {
+        return cursor;
     }
     return NULL;
 }

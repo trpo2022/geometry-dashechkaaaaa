@@ -5,7 +5,7 @@
 
 char* skipCircle(char* cursor, char* startcursor, char circle[])
 {
-    int len = 0;
+    long unsigned int len = 0;
 
     while (*startcursor == ' ') {
         startcursor++;
@@ -17,11 +17,10 @@ char* skipCircle(char* cursor, char* startcursor, char circle[])
         cursor++;
     }
 
-    if ((strncmp(circle, startcursor, strlen(circle)) == 0)) {
-        if (len_circle == len) {
-            return cursor;
-        }
+    if ((strncmp(circle, startcursor, strlen(circle)) == 0)
+        && (len == strlen(circle))) {
+        return cursor;
     }
-
+    
     return NULL;
 }
