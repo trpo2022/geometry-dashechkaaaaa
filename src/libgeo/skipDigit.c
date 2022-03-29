@@ -1,14 +1,8 @@
 #include "skipDigit.h"
 #include <ctype.h>
-#include <math.h>
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define SIZE 256
-#define _USE_MATH_DEFINES
-#define PI 3.1415926535
 
 char* skipDigit(char* cursor, double* digit)
 {
