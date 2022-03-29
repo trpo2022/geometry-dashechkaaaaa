@@ -1,3 +1,10 @@
 *.o
 *.a
 *.d
+bin/geometry
+obj/src/geometry/*.o
+obj/src/geometry/*.a
+obj/src/geometry/*.d
+obj/src/libgeo/*.o
+obj/src/libgeo/*.a
+obj/src/libgeo/*.d
