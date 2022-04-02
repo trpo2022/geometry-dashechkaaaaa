@@ -5,6 +5,6 @@
 
 double areaCircle(double radius)
 {
-    double circleA = 2 * M_PI * pow(radius, 2);
+    double circleA = M_PI * pow(radius, 2);
     return circleA;
 }
