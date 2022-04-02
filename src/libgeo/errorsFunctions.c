@@ -49,6 +49,11 @@ char* parseCircle(
         _Exit(EXIT_FAILURE);
     }
 
+if (radius <= 0){
+printf("The radius cannot be negative or equal to zero");
+_Exit(EXIT_FAILURE);
+}
+
     if ((cursor = skipSign(cursor, ')')) == NULL) {
         printf("The character is entered incorrectly: expected ')'\n");
         _Exit(EXIT_FAILURE);
