@@ -1,3 +1,3 @@
 #pragma once
 
-char* skipDigit(char*, double*);
+char* skipDigit(char*, double**);

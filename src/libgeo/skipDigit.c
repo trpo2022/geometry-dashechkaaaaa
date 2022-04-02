@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* skipDigit(char* cursor, double* digit)
+char* skipDigit(char* cursor, double** digit)
 {
     char* d;
     bool flag;
@@ -22,9 +22,9 @@ char* skipDigit(char* cursor, double* digit)
     }
 
     if (isdigit(*cursor) != 0) {
-        *digit = strtod(cursor, &d);
+        **digit = strtod(cursor, &d);
         if (flag != false) {
-            *digit *= -1;
+            **digit *= -1;
         }
         cursor = d;
     }
