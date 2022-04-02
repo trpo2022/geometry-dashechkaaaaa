@@ -1,7 +1,7 @@
 #include "skipCircle.h"
 #include <ctype.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 char* skipCircle(char* cursor, char* startcursor, char circle[])
 {
@@ -21,6 +21,6 @@ char* skipCircle(char* cursor, char* startcursor, char circle[])
         && (len == strlen(circle))) {
         return cursor;
     }
-    
+
     return NULL;
 }
