@@ -10,6 +10,8 @@
 #include "libgeo/skipDigit.h"
 #include "libgeo/skipSign.h"
 #include "libgeo/skipTriangle.h"
+#include "libgeo/intersection.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 char* parseCircle(
@@ -183,3 +185,4 @@ void validTriangle(double a, double b, double c)
         _Exit(EXIT_FAILURE);
     }
 }
+

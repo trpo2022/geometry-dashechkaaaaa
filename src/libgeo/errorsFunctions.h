@@ -13,4 +13,4 @@ char* parseTriangle(
         double*,
         double*,
         double*);
-void validTriangle(double a, double b, double c);
+void validTriangle(double, double, double);
