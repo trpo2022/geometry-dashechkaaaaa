@@ -10,7 +10,6 @@
 #include "libgeo/skipDigit.h"
 #include "libgeo/skipSign.h"
 #include "libgeo/skipTriangle.h"
-#include "libgeo/intersection.h"
 
 #include <stdio.h>
 #include <stdlib.h>
