@@ -1,57 +1,62 @@
+CC = gcc
+
+APP_NAME = geometry
+LIB_NAME = libgeo
+TEST_NAME = test
+
 CFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -I src -MP -MMD
+LDFLAGS =
+LDLIBS =
+
+BIN_DIR = bin
+OBJ_DIR = obj
+SRC_DIR = src
+TEST_DIR = test
+
+APP_PATH = bin/geometry
+TEST_PATH = bin/test
+LIB_PATH = obj/src/libgeo/libgeo.a
+
+SRC_EXT = c
+
+APP_SOURCES = $(shell find src/geometry -name '*.$(SRC_EXT)')
+APP_OBJECTS = $(APP_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
+
+TEST_SOURCES = $(shell find test -name '*.$(SRC_EXT)')
+TEST_OBJECTS = $(TEST_SOURCES:test/%.c=obj/test/%.o)
+
+LIB_SOURCES = $(shell find $(SRC_DIR)/$(LIB_NAME) -name '*.$(SRC_EXT)')
+LIB_OBJECTS = $(LIB_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
+
+DEPS = $(APP_OBJECTS:.o=.d) $(LIB_OBJECTS:.o=.d) $(TEST_OBJECTS:.o=.d)
+
+.PHONY: test clean
 
 all: bin/geometry
 
-bin/geometry: obj/src/geometry/geometry.o obj/src/libgeo/libgeo.a
-	gcc $(CFLAGS) -o $@ $^ -lm
+-include $(DEPS)
 
-obj/src/geometry/geometry.o: src/geometry/geometry.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm
+$(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS) -lm
 
-obj/src/libgeo/libgeo.a: obj/src/libgeo/skipTriangle.o obj/src/libgeo/skipCircle.o obj/src/libgeo/skipSign.o obj/src/libgeo/skipDigit.o obj/src/libgeo/checkEndStr.o obj/src/libgeo/perimeterCircle.o obj/src/libgeo/areaCircle.o obj/src/libgeo/sidesTriangle.o obj/src/libgeo/correctTriangle.o obj/src/libgeo/perimeterTriangle.o obj/src/libgeo/areaTriangle.o obj/src/libgeo/errorsFunctions.o obj/src/libgeo/intersection.o
+$(LIB_PATH): $(LIB_OBJECTS)
 	ar rcs $@ $^
 
+$(OBJ_DIR)/%.o: %.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) -I thirdparty $< -o $@ -lm
 
-obj/src/libgeo/skipTriangle.o: src/libgeo/skipTriangle.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm
-
-obj/src/libgeo/skipCircle.o: src/libgeo/skipCircle.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm
-
-obj/src/libgeo/skipSign.o: src/libgeo/skipSign.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm	
 	
-obj/src/libgeo/skipDigit.o: src/libgeo/skipDigit.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm
+test: $(TEST_PATH)
 
-obj/src/libgeo/checkEndStr.o: src/libgeo/checkEndStr.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm
 
-obj/src/libgeo/perimeterCircle.o: src/libgeo/perimeterCircle.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm	
+-include $(DEPS)
 
-obj/src/libgeo/areaCircle.o: src/libgeo/areaCircle.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm	
+$(TEST_PATH): $(TEST_OBJECTS) $(LIB_PATH)
+	$(CC) $(CFLAGS) -I thirdparty $^ -o $@ $(LDFLAGS) $(LDLIBS) -lm
 
-obj/src/libgeo/sidesTriangle.o: src/libgeo/sidesTriangle.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm		
-	
-obj/src/libgeo/correctTriangle.o: src/libgeo/correctTriangle.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm	
-	
-obj/src/libgeo/perimeterTriangle.o: src/libgeo/perimeterTriangle.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm		
-	
-obj/src/libgeo/areaTriangle.o: src/libgeo/areaTriangle.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm	
-	
-obj/src/libgeo/errorsFunctions.o: src/libgeo/errorsFunctions.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm	
-
-obj/src/libgeo/intersection.o: src/libgeo/intersection.c
-	gcc -c -I src $(CFLAGS) -o $@ $< -lm
-	
-.PHONY: clean
 
 clean:
-	rm obj/src/libgeo/*.a obj/src/libgeo/*.o obj/src/geometry/*.o bin/geometry
+	$(RM) $(APP_PATH) $(TEST_PATH) $(LIB_PATH)
+	find $(OBJ_DIR) -name '*.o' -exec $(RM) '{}' \;
+	find $(OBJ_DIR) -name '*.d' -exec $(RM) '{}' \;
