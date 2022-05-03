@@ -3,7 +3,7 @@
 #include "libgeo/checkEndStr.h"
 #include "libgeo/correctTriangle.h"
 #include "libgeo/errorsFunctions.h"
-#include "libgeo/intersection.h"
+#include "libgeo/checkIntersection.h"
 #include "libgeo/perimeterCircle.h"
 #include "libgeo/perimeterTriangle.h"
 #include "libgeo/sidesTriangle.h"
@@ -72,7 +72,7 @@ int main()
     printf("c = %lf\n", c);
     printf("perimeter = %lf \n", triangleP);
     printf("area = %lf\n \n", areaTriangle(a, b, c, triangleP));
-    if ((intersection(a, b, c, radius)) == false) {
+    if ((intersection(a, b, c, radius)) == 0) {
         printf("Figures do not intersect\n");
     } else {
         printf("Figures intersect\n");
