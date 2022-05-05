@@ -15,8 +15,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
-
 CTEST(geometry_suite, simple_intersection_0)
 {
     const int exp = 0;
@@ -70,8 +68,6 @@ CTEST(geometry_suite, simple_triangle_sides)
     ASSERT_EQUAL(exp, res);
 }
 
-
-
 CTEST(parsing_suite, ParsingCircle)
 {
     char enter[] = "circle(3 5, 4)\n";
@@ -79,19 +75,16 @@ CTEST(parsing_suite, ParsingCircle)
     char* startcursor = enter;
     char circle[] = {'c', 'i', 'r', 'c', 'l', 'e', '\0'};
     double x, y, radius;
-    int exp = 0; 
+    int exp = 0;
     const int res = 1;
-    if (parseCircle(cursor, startcursor, circle, &x, &y, &radius)){
-    	exp = 1;
+    if (parseCircle(cursor, startcursor, circle, &x, &y, &radius)) {
+        exp = 1;
     }
     ASSERT_EQUAL(exp, res);
-
 }
-
 
 CTEST(parsing_suite, ParsingTriangle)
 {
-
     char enter[] = "triangle((3 4, 5 5, 8 10, 3 4))\n";
     char* cursor = enter;
     char* startcursor = enter;
@@ -99,11 +92,21 @@ CTEST(parsing_suite, ParsingTriangle)
     char triangle[] = {'t', 'r', 'i', 'a', 'n', 'g', 'l', 'e', '\0'};
     double x1, y1, x2, y2, x3, y3, x4, y4;
 
-    int exp = 0; 
+    int exp = 0;
     const int res = 1;
-    if (parseTriangle(cursor, startcursor, triangle, &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4)){
-    	exp = 1;
+    if (parseTriangle(
+                cursor,
+                startcursor,
+                triangle,
+                &x1,
+                &y1,
+                &x2,
+                &y2,
+                &x3,
+                &y3,
+                &x4,
+                &y4)) {
+        exp = 1;
     }
     ASSERT_EQUAL(exp, res);
 }
-
